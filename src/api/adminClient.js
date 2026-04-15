@@ -57,6 +57,23 @@ export async function apiGet(path) {
   return handleResponse(res);
 }
 
+export async function apiGetRaw(path) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: 'GET',
+    headers: buildHeaders(false),
+    credentials: 'include',
+  });
+  if (!res.ok) {
+    let message = `Request failed with status ${res.status}`;
+    try {
+      const errorBody = await res.json();
+      if (errorBody && (errorBody.message || errorBody.error)) message = errorBody.message || errorBody.error;
+    } catch {}
+    throw new Error(message);
+  }
+  return res.json();
+}
+
 export async function apiPost(path, body, { isFormData = false } = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
     method: 'POST',
@@ -92,6 +109,7 @@ export async function apiDelete(path) {
 export function submitAdmissionApplication(form) {
   // Map frontend form fields -> backend schema
   const payload = {
+    source: 'admission',
     studentName: form.student_name,
     parentName: form.father_name || form.parent_name || '',
     email: form.email,
@@ -103,11 +121,27 @@ export function submitAdmissionApplication(form) {
   return apiPost('/admissions', payload);
 }
 
+export function submitContactInquiry(form) {
+  return apiPost('/admissions', {
+    source: 'contact',
+    studentName: form.name,
+    parentName: '',
+    email: form.email,
+    phone: form.phone || '',
+    class: '',
+    dob: null,
+    address: '',
+    subject: form.subject || 'Website Inquiry',
+    message: form.message || '',
+  });
+}
+
 export async function listAdmissions() {
   const data = await apiGet('/admissions');
   // Normalize to the shape used in admin UI
   return (data || []).map((a) => ({
     id: a._id,
+    source: a.source || 'admission',
     student_name: a.studentName,
     father_name: a.parentName,
     class_applying: a.class,
@@ -115,6 +149,8 @@ export async function listAdmissions() {
     phone: a.phone,
     address: a.address,
     date_of_birth: a.dob,
+    subject: a.subject || '',
+    message: a.message || '',
     created_date: a.createdAt,
     status: a.isContacted ? 'contacted' : 'pending',
   }));
@@ -220,11 +256,36 @@ export function deleteBanner(id) {
 }
 
 // Gallery
-export async function listGalleries() {
-  const data = await apiGet('/gallery');
+export async function listGalleries(page = 1, limit = 12) {
+  const res = await apiGetRaw(`/gallery?page=${page}&limit=${limit}`);
+  const data = res.data;
   // Flatten images for admin UI as individual image items
   const images = [];
   (data || []).forEach((g) => {
+    (g.images || []).forEach((img, idx) => {
+      images.push({
+        id: `${g._id}-${idx}`,
+        galleryId: g._id,
+        title: g.title,
+        category: g.category,
+        description: g.description,
+        image_url: img.url,
+      });
+    });
+  });
+  return { images, pagination: res.pagination };
+}
+
+export async function listGalleryImagesByCategory(category) {
+  const path = category && category !== 'all'
+    ? `/gallery/category/${encodeURIComponent(category)}`
+    : '/gallery';
+  const res = category && category !== 'all'
+    ? await apiGet(path)
+    : (await apiGetRaw(path)).data;
+
+  const images = [];
+  (res || []).forEach((g) => {
     (g.images || []).forEach((img, idx) => {
       images.push({
         id: `${g._id}-${idx}`,

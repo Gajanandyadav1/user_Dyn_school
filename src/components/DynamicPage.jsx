@@ -16,45 +16,47 @@ function HeroSection({ section, title, primaryColor, accentColor }) {
       <div className="absolute inset-0" style={{ background: `linear-gradient(to right, ${primaryColor}E6, ${primaryColor}BF, ${primaryColor}73)` }} />
       <div className="relative mx-auto flex min-h-screen max-w-6xl items-center px-4 py-24">
         <div className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em]" style={{ color: accentColor }}>Dynamic Page</p>
-        <h1 className="mt-4 text-5xl font-bold leading-tight md:text-6xl">{section.title || title}</h1>
-        {section.subtitle && <p className="mt-4 max-w-3xl text-lg text-slate-200">{section.subtitle}</p>}
-        {section.content && <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-100">{section.content}</p>}
-        {section.buttons?.length > 0 && (
-          <div className="mt-8 flex flex-wrap gap-4">
-            {section.buttons.map((button, index) =>
-              isExternalLink(button.link) ? (
-                <a
-                  key={`${button.label}-${index}`}
-                  href={button.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`rounded-full px-6 py-3 font-semibold transition ${
-                    index === 0
-                      ? "bg-[#FACC15] text-[#1E3A8A] hover:bg-[#fde68a]"
-                      : "border border-white/60 text-white hover:bg-white/10"
-                  }`}
-                  style={index === 0 ? { backgroundColor: accentColor, color: primaryColor } : undefined}
-                >
-                  {button.label}
-                </a>
-              ) : (
-                <Link
-                  key={`${button.label}-${index}`}
-                  to={normalizeSiteLink(button.link)}
-                  className={`rounded-full px-6 py-3 font-semibold transition ${
-                    index === 0
-                      ? "bg-[#FACC15] text-[#1E3A8A] hover:bg-[#fde68a]"
-                      : "border border-white/60 text-white hover:bg-white/10"
-                  }`}
-                  style={index === 0 ? { backgroundColor: accentColor, color: primaryColor } : undefined}
-                >
-                  {button.label}
-                </Link>
-              )
-            )}
-          </div>
-        )}
+          <p className="text-sm font-semibold uppercase tracking-[0.25em]" style={{ color: accentColor }}>
+            Dynamic Page
+          </p>
+          <h1 className="mt-4 text-5xl font-bold leading-tight md:text-6xl">{section.title || title}</h1>
+          {section.subtitle && <p className="mt-4 max-w-3xl text-lg text-slate-200">{section.subtitle}</p>}
+          {section.content && <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-100">{section.content}</p>}
+          {section.buttons?.length > 0 && (
+            <div className="mt-8 flex flex-wrap gap-4">
+              {section.buttons.map((button, index) =>
+                isExternalLink(button.link) ? (
+                  <a
+                    key={`${button.label}-${index}`}
+                    href={button.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`rounded-full px-6 py-3 font-semibold transition ${
+                      index === 0
+                        ? "bg-[#FACC15] text-[#1E3A8A] hover:bg-[#fde68a]"
+                        : "border border-white/60 text-white hover:bg-white/10"
+                    }`}
+                    style={index === 0 ? { backgroundColor: accentColor, color: primaryColor } : undefined}
+                  >
+                    {button.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={`${button.label}-${index}`}
+                    to={normalizeSiteLink(button.link)}
+                    className={`rounded-full px-6 py-3 font-semibold transition ${
+                      index === 0
+                        ? "bg-[#FACC15] text-[#1E3A8A] hover:bg-[#fde68a]"
+                        : "border border-white/60 text-white hover:bg-white/10"
+                    }`}
+                    style={index === 0 ? { backgroundColor: accentColor, color: primaryColor } : undefined}
+                  >
+                    {button.label}
+                  </Link>
+                )
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -82,7 +84,7 @@ function GallerySection({ section }) {
               <img src={image.url} alt={image.category || `Gallery ${index + 1}`} className="h-56 w-full object-cover" />
               <div className="p-4">
                 <p className="font-medium text-slate-900">{image.category || "General"}</p>
-                <p className="mt-1 text-sm text-slate-500">Size: {image.size_bytes} bytes</p>
+                <p className="mt-1 text-sm text-slate-500">Image from the managed gallery section.</p>
               </div>
             </div>
           ))}
@@ -155,6 +157,7 @@ export default function DynamicPage() {
     queryKey: ["site-settings"],
     queryFn: getSettings,
   });
+
   const primaryColor = settings.primary_color || "#1E3A8A";
   const accentColor = settings.accent_color || "#FACC15";
 
@@ -169,11 +172,17 @@ export default function DynamicPage() {
       <div className="mx-auto max-w-6xl px-4 py-20">
         <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
           <h1 className="text-3xl font-bold text-slate-900">Page not available</h1>
-          <p className="mt-4 text-slate-600">This page is hidden or doesn’t have any sections yet.</p>
+          <p className="mt-4 text-slate-600">This page is hidden or does not have any sections yet.</p>
         </div>
       </div>
     );
   }
 
-  return <div className="bg-slate-50">{page.sections.sort((a, b) => a.order - b.order).map((section) => renderSection(page.title, section, primaryColor, accentColor))}</div>;
+  return (
+    <div className="bg-slate-50">
+      {page.sections
+        .sort((a, b) => a.order - b.order)
+        .map((section) => renderSection(page.title, section, primaryColor, accentColor))}
+    </div>
+  );
 }

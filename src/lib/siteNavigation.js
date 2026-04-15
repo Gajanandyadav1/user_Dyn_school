@@ -36,8 +36,20 @@ export function getFallbackNavigation(userPages = []) {
 
 export function buildNavigation(navItems = [], userPages = []) {
   const activeItems = (navItems || []).filter((item) => item.is_active !== false);
+  const builtInRoutes = [
+    "/about",
+    "/academics",
+    "/programs",
+    "/admissions",
+    "/admissions/apply",
+    "/contact",
+    "/team",
+    "/gallery",
+    "/notices",
+  ];
   const validInternalLinks = new Set([
     "/",
+    ...builtInRoutes,
     ...(userPages || [])
       .filter((page) => page?.slug)
       .map((page) => `/${String(page.slug).replace(/^\/+/, "")}`),

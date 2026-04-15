@@ -3,13 +3,23 @@ import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getSettings } from "@/api/adminClient";
 import Navbar from "../website/Navbar";
+import TopBar from "../website/TopBar";
 import Footer from "../website/Footer";
+import Newsletter from "../website/Newsletter";
+import { usePageStore } from '../../store/pageContentStore';
   
 const Layout = () => {
+  const fetchContent = usePageStore((state) => state.fetchContent);
+  const content = usePageStore((state) => state.content);
+
   const { data: settings = {} } = useQuery({
     queryKey: ["site-settings"],
     queryFn: getSettings,
   });
+
+  useEffect(() => {
+    fetchContent();
+  }, [fetchContent]);
 
   useEffect(() => {
     const schoolName = settings.school_name || "Malhotra Public School";
@@ -23,6 +33,16 @@ const Layout = () => {
         document.head.appendChild(meta);
       }
       meta.setAttribute("content", settings.meta_description);
+    }
+
+    if (settings.meta_keywords) {
+      let metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (!metaKeywords) {
+        metaKeywords = document.createElement("meta");
+        metaKeywords.setAttribute("name", "keywords");
+        document.head.appendChild(metaKeywords);
+      }
+      metaKeywords.setAttribute("content", settings.meta_keywords);
     }
 
     if (settings.favicon) {
@@ -53,11 +73,13 @@ const Layout = () => {
 
   return (
     <div data-site-theme="true">
-      <Navbar/>
+      {/* <TopBar data={content?.home?.top_bar} /> */}
+      <Navbar />
       
       <Outlet />
 
-      <Footer />
+      <Newsletter data={content?.global?.newsletter} settings={settings} emailFallback={settings.email} />
+      <Footer data={content?.global} settings={settings} />
     </div>
   );
 };

@@ -1,26 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Phone, Calendar } from 'lucide-react';
+import { ArrowRight, Phone, Calendar, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { getSettings, getUserPages } from '@/api/adminClient';
-import { useQuery } from '@tanstack/react-query';
-import { getPageLink } from '@/lib/siteNavigation';
+import { DEFAULT_ACCENT, DEFAULT_PRIMARY } from '@/lib/siteTheme';
 
-export default function CTABanner() {
-  const { data: pages = [] } = useQuery({
-    queryKey: ['user-pages'],
-    queryFn: () => getUserPages(),
-  });
-  const { data: settings = {} } = useQuery({
-    queryKey: ['site-settings'],
-    queryFn: () => getSettings(),
-  });
-  const schoolName = settings.school_name || 'Malhotra Public School';
-  const phone = settings.phone || '+91 9876543210';
-  const primaryColor = settings.primary_color || '#1E3A8A';
-  const accentColor = settings.accent_color || '#FACC15';
-  const admissionsLink = getPageLink(pages, 'admissions');
+export default function Admission({ data }) {
+  const content = data;
+  const primaryColor = DEFAULT_PRIMARY;
+  const accentColor = '#FACC15';
+
+  // Fallback to top_bar phone if not strictly in admission
+  const phone = content?.phone || "+91 98765 43210";
+
+  if (!content) return null;
 
   return (
     <section className="py-20 relative overflow-hidden" style={{ backgroundColor: accentColor }}>
@@ -46,23 +39,27 @@ export default function CTABanner() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
+            <span className="inline-block px-4 py-2 font-semibold rounded-full mb-4 bg-white/50" style={{ color: primaryColor }}>
+               {content.subheading}
+            </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 font-['Poppins'] leading-tight" style={{ color: primaryColor }}>
-              Ready to Give Your Child the Best Education?
+              {content.heading}
             </h2>
-            <p className="text-lg mb-8" style={{ color: `${primaryColor}CC` }}>
-              Join the {schoolName} family today. Admissions are now open for the 
-              academic year 2026-27. Limited seats available.
+            <p className="text-lg mb-8 whitespace-pre-wrap" style={{ color: `${primaryColor}CC` }}>
+              {content.description}
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link
-                to={admissionsLink}
-                className="inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full transition-all hover:shadow-xl hover:-translate-y-1 group"
-                style={{ backgroundColor: primaryColor }}
-              >
-                Apply Now
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {content.buttonLink && (
+                <Link
+                  to={content.buttonLink}
+                  className="inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full transition-all hover:shadow-xl hover:-translate-y-1 group"
+                  style={{ backgroundColor: primaryColor }}
+                >
+                  Apply Now
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              )}
               <a
                 href={`tel:${phone}`}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white font-semibold rounded-full hover:shadow-xl transition-all"
@@ -89,7 +86,7 @@ export default function CTABanner() {
                 Admission Dates
               </h3>
               <p className="text-gray-600 text-sm">
-                March 1 - April 30, 2026
+                Open for Current Session
               </p>
             </div>
 
