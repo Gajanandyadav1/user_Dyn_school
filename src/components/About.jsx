@@ -75,6 +75,7 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
+
             <span className="inline-block px-4 py-2 text-sm font-semibold rounded-full mb-4" style={{ backgroundColor: accentColor, color: primaryColor }}>
               About Us
             </span>
@@ -89,6 +90,8 @@ export default function About() {
       </section>
 
       {/* About Content */}
+
+      
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
