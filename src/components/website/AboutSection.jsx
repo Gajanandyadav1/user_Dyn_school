@@ -12,6 +12,8 @@ export default function AboutSection({ data }) {
 
   if (!content) return null;
 
+  
+
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">

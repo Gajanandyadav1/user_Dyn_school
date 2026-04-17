@@ -115,6 +115,7 @@ export default function Admission({ data }) {
                   {content.scholarshipText || "Merit-based scholarships for outstanding students. Contact us to learn more."}
                 </p>
               </div>
+              
             )}
           </motion.div>
         </div>
