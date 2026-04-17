@@ -83,6 +83,8 @@ export default function Testimonials({ data }) {
                   </div>
 
                   {/* Quote */}
+
+                  
                   <p className="  text-lg md:text-xl leading-relaxed mb-6 italic whitespace-pre-wrap" style={{color:'black'}} >
                     "{current.reviewText}"
                   </p>
