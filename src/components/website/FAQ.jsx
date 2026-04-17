@@ -10,6 +10,7 @@ export default function FAQ({ data }) {
   // eslint-disable-next-line no-unused-vars
   const accentColor = DEFAULT_ACCENT;
 
+  
   const [openIndex, setOpenIndex] = useState(null);
 
   if (!content) return null;
