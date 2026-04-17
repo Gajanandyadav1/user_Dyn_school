@@ -111,6 +111,8 @@ export default function Academics() {
         </div>
       </section>
 
+      
+
       {/* Programs Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
