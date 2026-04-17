@@ -62,6 +62,7 @@ export default function DifferenceSection({ data }) {
                 }}
               >
                 {data.subheading}
+                
               </span>
             )}
 
