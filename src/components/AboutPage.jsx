@@ -226,6 +226,7 @@ export default function AboutPage() {
           {history?.heading || "Our Journey"}
         </h2>
 
+
         {history?.subheading && (
           <p className="text-xl font-medium text-[var(--site-primary)] mb-3">
             {history.subheading}
