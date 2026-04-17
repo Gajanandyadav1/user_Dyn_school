@@ -125,6 +125,7 @@ export default function Footer({ data, settings = {} }) {
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => (
                   <li key={index}>{renderNavLink(link)}</li>
+                  
                 ))}
               </ul>
             </div>
