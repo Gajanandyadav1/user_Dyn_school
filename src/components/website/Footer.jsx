@@ -121,7 +121,7 @@ export default function Footer({ data, settings = {} }) {
             </div>
 
             <div>
-              <h4 className="mb-6 text-lg font-bold font-['Poppins']">Quick Links</h4>
+              <h4 className="mb-6 text-lg font-bold font-['Poppins']" style={{color:'#fff'}}>Quick Links</h4>
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => (
                   <li key={index}>{renderNavLink(link)}</li>
@@ -130,7 +130,7 @@ export default function Footer({ data, settings = {} }) {
             </div>
 
             <div>
-              <h4 className="mb-6 text-lg font-bold font-['Poppins']">Academics</h4>
+              <h4 className="mb-6 text-lg font-bold font-['Poppins']" style={{color:'#fff'}}>Academics</h4>
               <ul className="space-y-3">
                 {academicsLinks.map((link, index) => (
                   <li key={index}>{renderNavLink(link)}</li>
@@ -139,7 +139,7 @@ export default function Footer({ data, settings = {} }) {
             </div>
 
             <div>
-              <h4 className="mb-6 text-lg font-bold font-['Poppins']">Contact Us</h4>
+              <h4 className="mb-6 text-lg font-bold font-['Poppins']" style={{color:'#fff'}}>Contact Us</h4>
               <ul className="space-y-4">
                 {address && (
                   <li className="flex items-start gap-3">

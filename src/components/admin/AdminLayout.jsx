@@ -78,7 +78,7 @@ const Layout = () => {
       
       <Outlet />
 
-      <Newsletter data={content?.global?.newsletter} settings={settings} emailFallback={settings.email} />
+      {/* <Newsletter data={content?.global?.newsletter} settings={settings} emailFallback={settings.email} /> */}
       <Footer data={content?.global} settings={settings} />
     </div>
   );

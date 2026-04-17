@@ -33,7 +33,7 @@ function HeroSection({ section, title, primaryColor, accentColor }) {
                     rel="noreferrer"
                     className={`rounded-full px-6 py-3 font-semibold transition ${
                       index === 0
-                        ? "bg-[#FACC15] text-[#1E3A8A] hover:bg-[#fde68a]"
+                        ? "bg-[var(--site-accent)] text-[var(--site-primary)] hover:bg-[#fde68a]"
                         : "border border-white/60 text-white hover:bg-white/10"
                     }`}
                     style={index === 0 ? { backgroundColor: accentColor, color: primaryColor } : undefined}
@@ -46,7 +46,7 @@ function HeroSection({ section, title, primaryColor, accentColor }) {
                     to={normalizeSiteLink(button.link)}
                     className={`rounded-full px-6 py-3 font-semibold transition ${
                       index === 0
-                        ? "bg-[#FACC15] text-[#1E3A8A] hover:bg-[#fde68a]"
+                        ? "bg-[var(--site-accent)] text-[var(--site-primary)] hover:bg-[#fde68a]"
                         : "border border-white/60 text-white hover:bg-white/10"
                     }`}
                     style={index === 0 ? { backgroundColor: accentColor, color: primaryColor } : undefined}
@@ -158,8 +158,8 @@ export default function DynamicPage() {
     queryFn: getSettings,
   });
 
-  const primaryColor = settings.primary_color || "#1E3A8A";
-  const accentColor = settings.accent_color || "#FACC15";
+  const primaryColor = settings.primary_color || "var(--site-primary)";
+  const accentColor = settings.accent_color || "var(--site-accent)";
 
   if (isLoading) {
     return <div className="mx-auto max-w-6xl px-4 py-20 text-slate-500">Loading page...</div>;

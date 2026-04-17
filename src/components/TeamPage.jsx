@@ -1,178 +1,15 @@
-// import React, { useEffect, useState } from 'react';
-// import { motion } from 'framer-motion';
-// import { Loader2 } from 'lucide-react';
-// import { getPageContent } from '../services/contentService';
-// import { usePageStore } from '../store/pageContentStore';
-// import FixedImage from './ui/FixedImage';
-
-// export default function TeamPage() {
-//   const [data, setData] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const defaultTeam = usePageStore(state => state.content.team);
-
-//   useEffect(() => {
-//     async function loadData() {
-//       const apiData = await getPageContent("team");
-//       setData({ ...defaultTeam, ...(apiData || {}) });
-//       setLoading(false);
-//     }
-//     loadData();
-//   }, [defaultTeam]);
-
-//   if (loading) {
-//     return (
-//       <div className="flex h-[70vh] flex-col items-center justify-center gap-4 text-slate-500">
-//         <Loader2 className="h-10 w-10 animate-spin text-[#1E3A8A]" />
-//         <p className="font-semibold text-lg animate-pulse tracking-wide font-['Poppins']">Loading Our Team...</p>
-//       </div>
-//     );
-//   }
-
-//   const { intro = {}, memberLeft = {}, memberRight = {}, teamHeader = {}, teamCards = {}, supportStaff = {} } = data || {};
-
-//   return (
-//     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pb-24">
-//       {/* 1. Intro Block */}
-//       <section className="bg-slate-50 border-b border-slate-200 py-20 text-center px-4">
-//         <h1 className="text-4xl md:text-5xl font-bold font-['Poppins'] text-[#1E3A8A] mb-4">{intro.heading || "Our Team"}</h1>
-//         {intro.subheading && <p className="text-xl font-medium text-slate-500 max-w-2xl mx-auto mb-2 uppercase tracking-widest">{intro.subheading}</p>}
-//         {intro.description && <p className="text-lg text-slate-600 max-w-3xl mx-auto">{intro.description}</p>}
-//       </section>
-
-//       {/* 2. Member (Image Left) */}
-//       {(memberLeft.heading || memberLeft.image) && (
-//         <section className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-//           <div className="flex flex-col md:flex-row gap-12 items-center">
-//             <div className="w-full md:w-5/12 shrink-0 relative">
-//                <div className="w-full shadow-2xl rounded-2xl overflow-hidden border-4 border-white bg-white hover:scale-[1.02] transition-transform duration-500">
-//                   <FixedImage src={memberLeft.image} ratio="3/4" />
-//                </div>
-//                {memberLeft.name && (
-//                  <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm shadow-lg rounded-xl p-4 text-center border border-white/20">
-//                     <h3 className="text-xl font-bold text-gray-900 font-['Poppins']">{memberLeft.name}</h3>
-//                     {memberLeft.smallText && <p className="text-sm font-medium text-[#1E3A8A] mt-1">{memberLeft.smallText}</p>}
-//                  </div>
-//                )}
-//             </div>
-//             <div className="w-full md:w-7/12 flex flex-col justify-center space-y-6">
-//                <h2 className="text-4xl font-bold text-gray-900 font-['Poppins']">{memberLeft.heading}</h2>
-//                {memberLeft.subheading && <h3 className="text-2xl font-medium text-slate-500">{memberLeft.subheading}</h3>}
-//                <p className="text-lg text-slate-600 leading-relaxed whitespace-pre-wrap">{memberLeft.description}</p>
-//             </div>
-//           </div>
-//         </section>
-//       )}
-
-//       {/* 3. Member (Image Right) */}
-//       {(memberRight.heading || memberRight.image) && (
-//         <section className="py-24 bg-slate-50">
-//           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-//             <div className="flex flex-col md:flex-row-reverse gap-12 items-center">
-//               <div className="w-full md:w-5/12 shrink-0 relative">
-//                  <div className="w-full shadow-2xl rounded-2xl overflow-hidden border-4 border-white bg-white hover:scale-[1.02] transition-transform duration-500">
-//                     <FixedImage src={memberRight.image} ratio="3/4" />
-//                  </div>
-//                  {memberRight.name && (
-//                    <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm shadow-lg rounded-xl p-4 text-center border border-white/20">
-//                       <h3 className="text-xl font-bold text-gray-900 font-['Poppins']">{memberRight.name}</h3>
-//                       {memberRight.smallText && <p className="text-sm font-medium text-[#1E3A8A] mt-1">{memberRight.smallText}</p>}
-//                    </div>
-//                  )}
-//               </div>
-//               <div className="w-full md:w-7/12 flex flex-col justify-center space-y-6">
-//                  <h2 className="text-4xl font-bold text-gray-900 font-['Poppins']">{memberRight.heading}</h2>
-//                  {memberRight.subheading && <h3 className="text-2xl font-medium text-slate-500">{memberRight.subheading}</h3>}
-//                  <p className="text-lg text-slate-600 leading-relaxed whitespace-pre-wrap">{memberRight.description}</p>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-//       )}
-
-//       {/* 4. Team Header */}
-//       {(teamHeader.heading || teamCards?.blocks?.length > 0) && (
-//         <section className="pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
-//           {teamHeader.subheading && <p className="text-sm font-bold tracking-[0.2em] uppercase text-[#1E3A8A] mb-4">{teamHeader.subheading}</p>}
-//           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 font-['Poppins'] mb-6">{teamHeader.heading || "Meet Our Extended Team"}</h2>
-//           {teamHeader.description && <p className="text-xl text-slate-600 max-w-3xl mx-auto">{teamHeader.description}</p>}
-//         </section>
-//       )}
-
-//       {/* 5. Team Cards (3 per row) */}
-//       {teamCards?.blocks && teamCards.blocks.length > 0 && (
-//         <section className="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//             {teamCards.blocks.map((card, idx) => (
-//               <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(30,58,138,0.08)] transition-all duration-300 border border-slate-100 group">
-//                 <div className="relative">
-//                   <FixedImage src={card.image} ratio="1/1" className="group-hover:scale-105 transition-transform duration-700" />
-//                   {card.roleText && (
-//                     <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold tracking-wider text-[#1E3A8A] uppercase shadow-sm">
-//                       {card.roleText}
-//                     </div>
-//                   )}
-//                 </div>
-//                 <div className="p-8 text-center flex flex-col h-full bg-white relative z-10">
-//                   <h3 className="text-2xl font-bold font-['Poppins'] text-gray-900">{card.name}</h3>
-//                   {card.subheading && <p className="text-[#1E3A8A] font-medium mt-1 mb-6">{card.subheading}</p>}
-
-//                   {/* Meta details */}
-//                   <div className="mt-auto grid grid-cols-2 gap-4 pt-6 border-t border-slate-100">
-//                     <div>
-//                        {card.leftText && <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">{card.leftText}</p>}
-//                        {card.leftBoldText && <p className="font-semibold text-slate-700">{card.leftBoldText}</p>}
-//                     </div>
-//                     <div>
-//                        {card.rightText && <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">{card.rightText}</p>}
-//                        {card.rightBoldText && <p className="font-semibold text-slate-700">{card.rightBoldText}</p>}
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </section>
-//       )}
-
-//       {/* 6. Support Staff */}
-//       {supportStaff?.blocks && supportStaff.blocks.length > 0 && (
-//         <section className="py-24 bg-slate-900 text-white">
-//           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-//             <div className="text-center max-w-3xl mx-auto mb-16">
-//               {supportStaff.subheading && <p className="text-sm font-bold tracking-[0.2em] uppercase text-yellow-300 mb-4">{supportStaff.subheading}</p>}
-//               <h2 className="text-4xl font-bold font-['Poppins'] mb-6">{supportStaff.heading || "Support Staff"}</h2>
-//               {supportStaff.description && <p className="text-lg text-slate-400 max-w-2xl mx-auto">{supportStaff.description}</p>}
-//             </div>
-
-//             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//                {supportStaff.blocks.map((support, idx) => (
-//                  <div key={idx} className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700 hover:bg-slate-800 transition-colors flex flex-col md:flex-row gap-6 items-start md:items-center">
-//                     <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[#1E3A8A] flex items-center justify-center font-bold text-2xl text-white shadow-inner">
-//                       {support.name ? support.name.substring(0, 2).toUpperCase() : "ST"}
-//                     </div>
-//                     <div>
-//                       <h3 className="text-xl font-bold font-['Poppins']">{support.name}</h3>
-//                       <p className="text-yellow-400 font-medium text-sm mt-1 mb-2">{support.role}</p>
-//                       <p className="text-slate-300 text-sm">{support.workDescription}</p>
-//                     </div>
-//                  </div>
-//                ))}
-//             </div>
-//           </div>
-//         </section>
-//       )}
-
-//     </motion.div>
-//   );
-// }
-
+/* eslint-disable no-unused-vars */
+ 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { Loader2, Award } from "lucide-react";
 import { getPageContent } from "../services/contentService";
 import { usePageStore } from "../store/pageContentStore";
 import FixedImage from "./ui/FixedImage";
-
+import { DEFAULT_ACCENT, DEFAULT_PRIMARY, withAlpha } from "../lib/siteTheme";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 export default function TeamPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -212,6 +49,30 @@ export default function TeamPage() {
   } = data || {};
 
   console.log("TEAM CARDS:", teamCards?.blocks);
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2500,
+  arrows: false,
+  responsive: [
+    {
+      breakpoint: 1280,
+      settings: { slidesToShow: 3 },
+    },
+    {
+      breakpoint: 768,
+      settings: { slidesToShow: 2 },
+    },
+    {
+      breakpoint: 480,
+      settings: { slidesToShow: 1 },
+    },
+  ],
+};
 
   return (
     <motion.div
@@ -220,143 +81,467 @@ export default function TeamPage() {
       className="pb-24"
     >
       {/* ================= INTRO ================= */}
-      <section className="py-20 text-center bg-slate-50">
-        <h1 className="text-4xl font-bold text-[#1E3A8A]">
-          {intro.heading || "Our Team"}
-        </h1>
+     <section  className="relative h-[70vh] min-h-[350px] overflow-hidden"
+  style={{ backgroundColor: DEFAULT_PRIMARY }} >
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center opacity-30"
+    style={{
+      backgroundImage: `url(${
+        intro.backgroundImage ||
+        intro.image ||
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920"
+      })`,
+    }}
+  />
 
-        {intro.subheading && (
-          <p className="text-gray-500 mt-2">{intro.subheading}</p>
+  {/* Overlay */}
+  <div
+    className="absolute inset-0"
+    style={{
+      background: `linear-gradient(to right, ${DEFAULT_PRIMARY}, ${withAlpha(
+        DEFAULT_PRIMARY,
+        0.8,
+        "var(--site-primary)"
+      )}, transparent)`,
+    }}
+  />
+
+  {/* Center Content */}
+  <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center justify-center">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+      className="text-center max-w-3xl"
+    >
+      {intro.subheading && (
+        <span
+          className="inline-block px-4 py-2 text-sm font-semibold rounded-full mb-4"
+          style={{
+             color:'#fff'
+          }}
+        >
+          {intro.subheading}
+        </span>
+      )}
+
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 font-['Poppins']" style={{color:'#fff'}}>
+        {intro.heading || "Our Team"} 
+      </h1>
+
+      {intro.description && (
+        <p className="text-xl text-gray-200 leading-8">
+          {intro.description}
+        </p>
+      )}
+    </motion.div>
+  </div>
+</section>
+      {/* ================= MEMBER LEFT ================= */}
+     {/* ================= MEMBER LEFT ================= */}
+{(memberLeft.heading || memberLeft.image) && (
+  <section className="py-20 md:py-28 bg-white">
+    <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
+      
+      {/* Image Side */}
+      <div className="relative group">
+        <div
+          className="absolute -inset-3 rounded-[32px] blur-2xl opacity-20 group-hover:opacity-30 transition-all duration-500"
+          style={{ background: DEFAULT_PRIMARY }}
+        ></div>
+
+        <div className="relative rounded-[32px] overflow-hidden bg-white border border-slate-200 shadow-[0_25px_60px_rgba(0,0,0,0.12)]">
+          <FixedImage src={memberLeft.image} ratio="5/5" />
+
+          {/* Floating Badge */}
+          {memberLeft.smallText && (
+            <div
+              className="absolute bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-semibold shadow-xl text-white"
+              style={{ background: DEFAULT_PRIMARY }}
+            >
+              {memberLeft.smallText}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Content Side */}
+      <div>
+        <span
+          className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[2px] uppercase mb-5"
+          style={{
+            background: withAlpha(DEFAULT_PRIMARY, 0.08),
+            color: DEFAULT_PRIMARY,
+          }}
+        >
+          Leadership Message
+        </span>
+
+        {memberLeft.name && (
+          <h2 className="text-4xl md:text-5xl font-bold   font-['Poppins'] leading-tight" style={{color:'#2b2a2a'}}>
+            {memberLeft.name}
+          </h2>
         )}
 
-        {intro.description && (
-          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-            {intro.description}
+        {memberLeft.subheading && (
+          <p className="mt-3 text-xl   font-medium" style={{color:'#000'}}>
+            {memberLeft.subheading}
           </p>
         )}
-      </section>
 
-      {/* ================= MEMBER LEFT ================= */}
-      {(memberLeft.heading || memberLeft.image) && (
-        <section className="py-20 max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-10 items-center">
-          <div className="w-full md:w-5/12">
-            <FixedImage src={memberLeft.image} ratio="3/4" />
+        {memberLeft.heading && (
+          <p
+            className="mt-4 text-lg font-semibold"
+            style={{ color: DEFAULT_PRIMARY }}
+          >
+            {memberLeft.heading}
+          </p>
+        )}
+
+        {memberLeft.description && (
+          <div className="mt-8 border-l-4 pl-6 italic   leading-8 text-lg"
+            style={{ borderColor: DEFAULT_PRIMARY , color:'#65758b'}}
+          >
+            {memberLeft.description}
           </div>
+        )}
+      </div>
+    </div>
+  </section>
+)}
 
-          <div className="w-full md:w-7/12">
-            <h2 className="text-3xl font-bold">{memberLeft.heading}</h2>
+{/* ================= MEMBER RIGHT ================= */}
+{(memberRight.heading || memberRight.image) && (
+  <section className="py-20 md:py-28 bg-slate-50">
+    <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
+      
+      {/* Image Side */}
+      <div className="relative group md:order-2">
+        <div
+          className="absolute -inset-3 rounded-[32px] blur-2xl opacity-20 group-hover:opacity-30 transition-all duration-500"
+          style={{ background: DEFAULT_PRIMARY ,}}
+        ></div>
 
-            <p className="text-gray-500 mt-2">{memberLeft.subheading}</p>
+        <div className="relative rounded-[32px] overflow-hidden bg-white border border-slate-200 shadow-[0_25px_60px_rgba(0,0,0,0.12)]">
+          <FixedImage src={memberRight.image} ratio="5/4" />
 
-            <p className="mt-4 text-gray-700">{memberLeft.description}</p>
-          </div>
-        </section>
-      )}
-
-      {/* ================= MEMBER RIGHT ================= */}
-      {(memberRight.heading || memberRight.image) && (
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row-reverse gap-10 items-center">
-            <div className="w-full md:w-5/12">
-              <FixedImage src={memberRight.image} ratio="3/4" />
+          {/* Floating Badge */}
+          {memberRight.smallText && (
+            <div
+              className="absolute bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-semibold shadow-xl text-white"
+              style={{ background: DEFAULT_PRIMARY }}
+            >
+              {memberRight.smallText}h
             </div>
+          )}
+        </div>
+      </div>
 
-            <div className="w-full md:w-7/12">
-              <h2 className="text-3xl font-bold">{memberRight.heading}</h2>
+      {/* Content Side */}
+      <div className="md:order-1">
+        <span
+          className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[2px] uppercase mb-5"
+          style={{
+            background: withAlpha(DEFAULT_PRIMARY, 0.08),
+            color: DEFAULT_PRIMARY,
+          }}
+        >
+          From The Principal's Desk
+        </span>
 
-              <p className="text-gray-500 mt-2">{memberRight.subheading}</p>
+        {memberRight.name && (
+          <h2 className="text-4xl md:text-5xl font-bold   font-['Poppins'] leading-tight" style={{color:'#2b2a2a'}}>
+            {memberRight.name}
+          </h2>
+        )}
 
-              <p className="mt-4 text-gray-700">{memberRight.description}</p>
-            </div>
+        {memberRight.subheading && (
+          <p className="mt-3 text-xl  font-medium" style={{color:'#000'}}>
+            {memberRight.subheading}
+          </p>
+        )}
+
+        {memberRight.heading && (
+          <p
+            className="mt-4 text-lg font-semibold"
+            style={{ color: DEFAULT_PRIMARY }}
+          >
+            {memberRight.heading}
+          </p>
+        )}
+
+        {memberRight.description && (
+          <div
+            className="mt-8 border-l-4 pl-6 italic  leading-8 text-lg"
+            style={{ borderColor: DEFAULT_PRIMARY , color:'#65758b'}}
+          >
+            {memberRight.description}
           </div>
-        </section>
-      )}
-
+        )}
+      </div>
+    </div>
+  </section>
+)}
       {/* ================= TEAM HEADER ================= */}
       {(teamHeader.heading || teamCards?.blocks?.length > 0) && (
         <section className="py-16 text-center">
-          <h2 className="text-4xl font-bold">
+          <h2 className="text-4xl font-bold" style={{color:'#000000'}}>
             {teamHeader.heading || "Our Team Members"}
           </h2>
 
           {teamHeader.description && (
-            <p className="text-gray-600 mt-4">{teamHeader.description}</p>
+            <p className="text-gray-600 mt-4" style={{color:"#000"}}>{teamHeader.description}</p>
           )}
         </section>
       )}
 
       {/* ================= TEAM CARDS ================= */}
-      {teamCards?.blocks?.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamCards.blocks.map((card, idx) => {
-              // 🔥 FIX: ADMIN → FRONTEND FIELD MAPPING
-              const leftText = card.leftText || card.leftDetailsLabel || "";
+     {teamCards?.blocks?.length > 0 && (
+  <section className="max-w-7xl mx-auto px-4 pb-20 mt-12">
+    <Slider {...settings}>
+      {teamCards.blocks
+        .filter((card) => card.isActive !== "false")
+        .sort((a, b) => (Number(a.order) || 99) - (Number(b.order) || 99))
+        .map((card, idx) => {
+          const name = card.name || "No Name";
+          const initials = name
+            .split(" ")
+            .map((n) => n[0])
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
 
-              const leftBoldText =
-                card.leftBoldText || card.leftDetailsValue || "";
+          const roleOrSubject =
+            card.roleText || card.subheading || "";
 
-              const rightText = card.rightText || card.rightDetailsLabel || "";
+          const leftLabel =
+            card.leftText || "Qualification";
+          const leftValue =
+            card.leftBoldText || "Not specified";
 
-              const rightBoldText =
-                card.rightBoldText || card.rightDetailsValue || "";
+          const rightLabel =
+            card.rightText || "Experience";
+          const rightValue =
+            card.rightBoldText || "0 years";
 
-              return (
-                <div
-                  key={idx}
-                  className="bg-white border rounded-2xl p-6 shadow hover:shadow-lg transition"
-                >
-                  <FixedImage src={card.image} ratio="1/1" />
+          return (
+            <div key={idx} className="px-3 py-4">
+              <div className="bg-white border border-slate-100 rounded-[28px] p-8 pb-10 shadow-sm hover:shadow-[0_15px_35px_rgba(30,58,138,0.12)] transition-all duration-300 flex flex-col items-center text-center relative group min-h-[420px]">
+                
+                {/* Image */}
+                <div className="w-28 h-28 mb-5 rounded-full overflow-hidden bg-slate-100 border-4 border-white shadow-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                  {card.image ? (
+                    <img
+                      src={card.image}
+                      alt={name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-3xl font-bold text-slate-400">
+                      {initials}
+                    </span>
+                  )}
+                </div>
 
-                  <h3 className="text-xl font-bold mt-4">
-                    {card.name || "No Name"}
-                  </h3>
+                {/* Name */}
+                <h3 className="text-xl font-bold mb-1 text-black">
+                  {name}
+                </h3>
 
-                  <p className="text-blue-700">{card.subheading}</p>
+                {/* Role */}
+                {roleOrSubject && (
+                  <p
+                    className="text-sm font-semibold tracking-wide mb-3"
+                    style={{ color: DEFAULT_PRIMARY }}
+                  >
+                    {roleOrSubject}
+                  </p>
+                )}
 
-                  <p className="text-sm text-gray-500">{card.roleText}</p>
+                {/* Description */}
+                {card.description && (
+                  <p className="text-xs text-slate-500 line-clamp-3 mb-4">
+                    {card.description}
+                  </p>
+                )}
 
-                  {/* META DETAILS */}
-                  <div className="grid grid-cols-2 gap-4 mt-4 border-t pt-4">
-                    <div>
-                      <p className="text-xs text-gray-400">{leftText || "—"}</p>
-                      <p className="font-semibold">{leftBoldText || "—"}</p>
-                    </div>
+                {/* Bottom Details */}
+                <div className="w-full grid grid-cols-2 gap-2 mt-auto border-t border-slate-100 pt-5">
+                  <div className="flex flex-col gap-1 items-center">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-black">
+                      {leftLabel}
+                    </span>
+                    <span className="text-sm font-semibold text-black">
+                      {leftValue}
+                    </span>
+                  </div>
 
-                    <div>
-                      <p className="text-xs text-gray-400">
-                        {rightText || "—"}
-                      </p>
-                      <p className="font-semibold">{rightBoldText || "—"}</p>
-                    </div>
+                  <div className="flex flex-col gap-1 items-center border-l border-slate-100">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-black">
+                      {rightLabel}
+                    </span>
+                    <span className="text-sm font-semibold text-black">
+                      {rightValue}
+                    </span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
 
-      {/* ================= SUPPORT STAFF ================= */}
-      {supportStaff?.blocks?.length > 0 && (
-        <section className="py-20 bg-slate-900 text-white">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-3xl text-center font-bold mb-10">
-              {supportStaff.heading || "Support Staff"}
-            </h2>
+                {/* Social */}
+                {(card.facebook ||
+                  card.twitter ||
+                  card.linkedin) && (
+                  <div className="absolute -bottom-5 flex gap-2">
+                    {card.facebook && (
+                      <a
+                        href={card.facebook}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg"
+                      >
+                        f
+                      </a>
+                    )}
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {supportStaff.blocks.map((s, i) => (
-                <div key={i} className="bg-slate-800 p-5 rounded-xl">
-                  <h3 className="font-bold text-lg">{s.name}</h3>
-                  <p className="text-yellow-400">{s.role}</p>
-                  <p className="text-sm text-gray-300">{s.workDescription}</p>
-                </div>
-              ))}
+                    {card.twitter && (
+                      <a
+                        href={card.twitter}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full bg-sky-500 text-white flex items-center justify-center shadow-lg"
+                      >
+                        𝕏
+                      </a>
+                    )}
+
+                    {card.linkedin && (
+                      <a
+                        href={card.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full bg-blue-800 text-white flex items-center justify-center shadow-lg"
+                      >
+                        in
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          );
+        })}
+    </Slider>
+  </section>
+)}
+
+     {/* ================= SUPPORT STAFF ================= */}
+{supportStaff?.blocks?.length > 0 && (
+  <section className="py-24 bg-[#f8fafc] relative overflow-hidden">
+    {/* Background Glow */}
+    <div
+      className="absolute top-0 left-0 w-72 h-72 rounded-full blur-3xl opacity-10"
+      style={{ background: DEFAULT_PRIMARY }}
+    ></div>
+    <div
+      className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-10"
+      style={{ background: DEFAULT_PRIMARY }}
+    ></div>
+
+    <div className="max-w-7xl mx-auto px-4 relative z-10">
+      {/* Heading */}
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <span
+          className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[2px] uppercase mb-5"
+          style={{
+            background: withAlpha(DEFAULT_PRIMARY, 0.08),
+            color: DEFAULT_PRIMARY,
+          }}
+        >
+          Support Staff
+        </span>
+
+        <h2 className="text-4xl md:text-6xl font-bold  font-['Poppins'] leading-tight" style={{color:'#000'}}>
+          {supportStaff.heading || "The Pillars Behind the Scenes"}
+        </h2>
+
+        <p className="  text-lg mt-5 leading-8"  style={{color:'#000'}}>
+          {supportStaff.description ||
+            "Our dedicated administrative and support staff ensure smooth operations every single day."}
+        </p>
+      </div>
+
+      {/* Slider */}
+      <Slider
+        dots={true}
+        infinite={true}
+        autoplay={true}
+        speed={600}
+        autoplaySpeed={4500}
+        slidesToShow={3}
+        slidesToScroll={1}
+        arrows={false}
+        responsive={[
+          {
+            breakpoint: 1024,
+            settings: { slidesToShow: 2 },
+          },
+          {
+            breakpoint: 640,
+            settings: { slidesToShow: 1 },
+          },
+        ]}
+      >
+        {supportStaff.blocks.map((s, i) => {
+          const initials =
+            s.name
+              ?.split(" ")
+              .map((n) => n[0])
+              .join("")
+              .substring(0, 2)
+              .toUpperCase() || "ST";
+
+          return (
+            <div key={i} className="px-3">
+              <div className="group bg-white border border-slate-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 min-h-[130px]">
+                
+                {/* Avatar */}
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-sm font-bold shrink-0"
+                  style={{
+                    background: withAlpha(DEFAULT_PRIMARY, 0.08),
+                    color: DEFAULT_PRIMARY,
+                  }}
+                >
+                  {initials}
+                </div>
+
+                {/* Content */}
+                <div className="min-w-0">
+                  <h3 className="text-lg font-bold  truncate"  style={{color:'#000'}}>
+                    {s.name}
+                  </h3>
+
+                  <p
+                    className="text-sm font-medium"
+                    style={{ color: DEFAULT_PRIMARY }}
+                  >
+                    {s.role}
+                  </p>
+
+                  {s.workDescription && (
+                    <p className="text-sm  mt-1 line-clamp-2" style={{color:'#000'}}>
+                      {s.workDescription}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </Slider>
+    </div>
+  </section>
+)}
     </motion.div>
   );
 }

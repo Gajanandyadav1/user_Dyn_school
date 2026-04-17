@@ -39,7 +39,7 @@ export default function AdminSidebar({
     <aside
       className={`
         fixed lg:static top-0 left-0 h-screen
-        bg-[#1E3A8A] text-white z-40
+        bg-[var(--site-primary)] text-white z-40
         transform transition-transform duration-300
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0

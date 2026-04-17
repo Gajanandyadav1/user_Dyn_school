@@ -137,7 +137,7 @@ const defaultPageContent = {
     }
   },
   about: {
-    hero: { heading: "About Us", subheading: "Our Story", description: "", backgroundColor: "#1E3A8A", backgroundImage: "" },
+    hero: { heading: "About Us", subheading: "Our Story", description: "", backgroundColor: "var(--site-primary)", backgroundImage: "" },
     section2: { heading: "Our History", subheading: "", description: "", image: "" },
     tabs: { heading: "Mission & Vision", subheading: "", description: "", blocks: [] },
     slider: { heading: "Core Values", subheading: "", description: "", blocks: [] },

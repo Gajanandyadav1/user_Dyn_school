@@ -8,7 +8,7 @@ export default function LoadingScreen() {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-[#1E3A8A] flex items-center justify-center z-[100]"
+      className="fixed inset-0 bg-[var(--site-primary)] flex items-center justify-center z-[100]"
     >
       <div className="text-center">
         <motion.div
@@ -21,9 +21,9 @@ export default function LoadingScreen() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="w-20 h-20 bg-[#FACC15] rounded-full flex items-center justify-center mx-auto mb-6"
+          className="w-20 h-20 bg-[var(--site-accent)] rounded-full flex items-center justify-center mx-auto mb-6"
         >
-          <GraduationCap className="w-10 h-10 text-[#1E3A8A]" />
+          <GraduationCap className="w-10 h-10 text-[var(--site-primary)]" />
         </motion.div>
         
         <motion.h2
@@ -48,7 +48,7 @@ export default function LoadingScreen() {
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
-          className="h-1 bg-[#FACC15] rounded-full mt-6 mx-auto max-w-xs"
+          className="h-1 bg-[var(--site-accent)] rounded-full mt-6 mx-auto max-w-xs"
         />
       </div>
     </motion.div>

@@ -270,6 +270,9 @@ export async function listGalleries(page = 1, limit = 12) {
         category: g.category,
         description: g.description,
         image_url: img.url,
+        type: g.type || 'image',
+        status: g.status || 'active',
+        order: g.order || 0
       });
     });
   });
@@ -294,6 +297,9 @@ export async function listGalleryImagesByCategory(category) {
         category: g.category,
         description: g.description,
         image_url: img.url,
+        type: g.type || 'image',
+        status: g.status || 'active',
+        order: g.order || 0
       });
     });
   });

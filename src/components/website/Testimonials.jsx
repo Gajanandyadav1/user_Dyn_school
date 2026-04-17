@@ -24,7 +24,7 @@ export default function Testimonials({ data }) {
     <section className="py-20 bg-gradient-to-br from-[#1E3A8A] via-[#1E40AF] to-[#3B82F6] relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FACC15]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[var(--site-accent)]/10 rounded-full blur-3xl" />
       
       {/* Quote Pattern */}
       <div className="absolute top-20 right-20 opacity-10">
@@ -39,10 +39,10 @@ export default function Testimonials({ data }) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-[#FACC15]/20 text-[#FACC15] text-sm font-semibold rounded-full mb-4">
+          <span className="inline-block px-4 py-2 bg-[var(--site-accent)]/20 text-[var(--site-accent)] text-sm font-semibold rounded-full mb-4">
             {content.subheading}
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-['Poppins']">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-['Poppins']" style={{color:"#fff"}}  >
             {content.heading}
           </h2>
         </motion.div>
@@ -65,10 +65,10 @@ export default function Testimonials({ data }) {
                     <img
                       src={current.image || `https://ui-avatars.com/api/?name=${current.name || 'A'}&background=1E3A8A&color=fff&size=128`}
                       alt={current.name}
-                      className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-[#FACC15]"
+                      className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-[var(--site-accent)]"
                     />
-                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-[#FACC15] rounded-full flex items-center justify-center">
-                      <Quote className="w-5 h-5 text-[#1E3A8A]" />
+                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-[var(--site-accent)] rounded-full flex items-center justify-center">
+                      <Quote className="w-5 h-5 text-[var(--site-primary)]" />
                     </div>
                   </div>
                 </div>
@@ -78,22 +78,22 @@ export default function Testimonials({ data }) {
                   {/* Rating */}
                   <div className="flex gap-1 justify-center md:justify-start mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-[#FACC15]" fill="currentColor" />
+                      <Star key={i} className="w-5 h-5 text-[var(--site-accent)]" fill="currentColor" />
                     ))}
                   </div>
 
                   {/* Quote */}
-                  <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-6 italic whitespace-pre-wrap">
+                  <p className="  text-lg md:text-xl leading-relaxed mb-6 italic whitespace-pre-wrap" style={{color:'black'}} >
                     "{current.reviewText}"
                   </p>
 
                   {/* Author */}
                   <div>
-                    <h4 className="text-xl font-bold text-gray-900 font-['Poppins']">
+                    <h4 className="text-xl font-bold   font-['Poppins']" style={{color:'black'}}>
                       {current.name}
                     </h4>
-                    <p className="text-[#1E3A8A] font-medium">
-                      {current.role}
+                    <p className="text-[var(--site-primary)] font-medium">
+                      {current.role} 
                     </p>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default function Testimonials({ data }) {
             <div className="flex justify-center gap-4 mt-8">
               <button
                 onClick={prevTestimonial}
-                className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white hover:text-[#1E3A8A] transition-all"
+                className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white hover:text-[var(--site-primary)] transition-all"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -119,7 +119,7 @@ export default function Testimonials({ data }) {
                     onClick={() => setCurrentIndex(index)}
                     className={`h-2 rounded-full transition-all ${
                       index === currentIndex
-                        ? 'w-8 bg-[#FACC15]'
+                        ? 'w-8 bg-[var(--site-accent)]'
                         : 'w-2 bg-white/50 hover:bg-white'
                     }`}
                   />
@@ -128,7 +128,7 @@ export default function Testimonials({ data }) {
 
               <button
                 onClick={nextTestimonial}
-                className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white hover:text-[#1E3A8A] transition-all"
+                className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white hover:text-[var(--site-primary)] transition-all"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>

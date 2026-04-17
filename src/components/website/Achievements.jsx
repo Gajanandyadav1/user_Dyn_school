@@ -77,7 +77,7 @@ export default function Achievements({ data }) {
           <span className="inline-block px-4 py-2 text-sm font-semibold rounded-full mb-4" style={{ backgroundColor: withAlpha(accentColor, 0.2, DEFAULT_ACCENT), color: accentColor }}>
             {content.subheading}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white font-['Poppins']">
+          <h2 className="text-3xl md:text-4xl font-bold text-white font-['Poppins']" style={{color:"#fff"}}>
             {content.heading}
           </h2>
         </motion.div>

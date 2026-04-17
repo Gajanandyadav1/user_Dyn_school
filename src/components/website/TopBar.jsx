@@ -13,7 +13,7 @@ export default function TopBar({ data }) {
 
   const phone = data.phone || settings.phone;
   const email = data.email || settings.email;
-  const primaryColor = settings.primary_color || "#1E3A8A";
+  const primaryColor = settings.primary_color || "var(--site-primary)";
 
   return (
     <div className="py-2 hidden md:block text-white relative z-50" style={{ backgroundColor: primaryColor }}>

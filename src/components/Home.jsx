@@ -1,14 +1,16 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion'; 
 import { Loader2, AlertCircle } from 'lucide-react';
 import { usePageStore } from '../store/pageContentStore';
+
 
 import HeroSlider from './website/HeroSlider';
 import AboutSection from './website/AboutSection';
 import DifferenceSection from './website/DifferenceSection';
 import Achievements from './website/Achievements';
 import Programs from './website/Programs';
-import Notices from './website/Notices';
+import FAQ from './website/FAQ';
 import Testimonials from './website/Testimonials';
 import Admission from './website/Admission';
 
@@ -25,7 +27,7 @@ export default function Home() {
   if (isLoading) {
     return (
       <div className="flex h-[70vh] flex-col items-center justify-center gap-4 text-slate-500">
-        <Loader2 className="h-10 w-10 animate-spin text-[#1E3A8A]" />
+        <Loader2 className="h-10 w-10 animate-spin text-[var(--site-primary)]" />
         <p className="font-semibold text-lg animate-pulse tracking-wide font-['Poppins']">Loading Experience...</p>
       </div>
     );
@@ -59,7 +61,7 @@ export default function Home() {
       <DifferenceSection data={content?.home?.difference_section} />
       <Achievements data={content?.home?.achievements} />
       <Programs data={content?.home?.programs} />
-      <Notices data={content?.home?.notices} />
+      <FAQ data={content?.home?.faq || content?.home?.notices} />
       <Testimonials data={content?.home?.testimonials} />
       <Admission data={content?.home?.admission} />
     </motion.div>

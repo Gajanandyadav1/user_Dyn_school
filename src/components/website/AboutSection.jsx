@@ -26,11 +26,11 @@ export default function AboutSection({ data }) {
           >
             <div className="relative">
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl bg-slate-100">
-                <img
-                  src={content.image}
-                  alt="About Us"
-                  className="w-full h-[400px] lg:h-[500px] object-cover"
-                />
+             <img
+  src={content.image}
+  alt="About Us"
+  className="w-full   object-cover object-center "
+/>
               </div>
 
               {/* Decorative Elements */}
@@ -50,7 +50,7 @@ export default function AboutSection({ data }) {
               {content.subheading}  
             </span>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 font-['Poppins'] leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold   mb-6 font-['Poppins'] leading-tight" style={{color:"black"}}>
               {content.heading}
             </h2>
 

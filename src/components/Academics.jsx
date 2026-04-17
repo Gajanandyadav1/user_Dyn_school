@@ -123,7 +123,7 @@ export default function Academics() {
             <span className="inline-block px-4 py-2 text-sm font-semibold rounded-full mb-4" style={{ backgroundColor: withAlpha(primaryColor, 0.1, DEFAULT_PRIMARY), color: primaryColor }}>
               Our Programs
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-['Poppins']">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-['Poppins']" >
               Academic <span style={{ color: primaryColor }}>Programs</span>
             </h2>
           </motion.div>
