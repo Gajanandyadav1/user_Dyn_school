@@ -122,8 +122,7 @@ export default function Programs({ data }) {
                             <img
                               src={program.image}
                               alt={program.title}
-                              className="w-full h-full object-cover "
-                            />
+                              className="w-full h-full object-cover " />
                           </div>
                         ) : (
                           <div
