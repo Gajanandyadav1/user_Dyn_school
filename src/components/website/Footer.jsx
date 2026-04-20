@@ -24,6 +24,7 @@ export default function Footer({ data, settings = {} }) {
   const quickLinks = data?.quickLinks?.blocks || [];
   const academicsLinks = data?.academicsLinks?.blocks || [];
 
+  
   if (!data) return null;
 
   // eslint-disable-next-line no-unused-vars
