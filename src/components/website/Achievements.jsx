@@ -64,6 +64,7 @@ export default function Achievements({ data }) {
         />
       </div>
 
+
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: withAlpha(accentColor, 0.2, DEFAULT_ACCENT) }} />
       <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: withAlpha(primaryColor, 0.25, DEFAULT_PRIMARY) }} />
 
