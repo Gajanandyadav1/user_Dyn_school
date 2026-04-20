@@ -18,6 +18,7 @@ export default function HeroSlider({ data }) {
   const primaryColor = "var(--site-primary)";
 
   const slides =
+  
     content?.blocks && content.blocks.length > 0
       ? content.blocks
       : content?.heading
