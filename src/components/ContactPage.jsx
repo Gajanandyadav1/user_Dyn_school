@@ -104,6 +104,7 @@ export default function ContactPage() {
                        <textarea rows="4" value={formValues[normalizeFieldKey(field)] || ''} onChange={(e) => handleFieldChange(field, e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#1E3A8A] focus:border-transparent transition text-dark-900 bg-gray-50/50" placeholder={`Enter your ${field.toLowerCase()}...`}></textarea>
                     ) : (
                       
+                      
                        <input type={field.toLowerCase().includes('email') ? 'email' : 'text'} value={formValues[normalizeFieldKey(field)] || ''} onChange={(e) => handleFieldChange(field, e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#1E3A8A] focus:border-transparent transition   bg-gray-50/50" placeholder={`Enter ${field.toLowerCase()}...`} style={{color:'#000'}} />
                     )}
                   </div>
