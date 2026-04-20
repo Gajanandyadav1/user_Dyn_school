@@ -118,6 +118,7 @@ const settings = {
           {intro.subheading}
         </span>
       )}
+      
 
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 font-['Poppins']" style={{color:'#fff'}}>
         {intro.heading || "Our Team"} 
