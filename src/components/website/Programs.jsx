@@ -119,6 +119,7 @@ export default function Programs({ data }) {
                         {/* Image / Icon */}
                         {program.image ? (
                           <div className="w-full h-40 rounded-sm overflow-hidden mb-6 bg-slate-100 group-hover:ring-4 ring-white/30 transition-all">
+                           
                             <img
                               src={program.image}
                               alt={program.title}
