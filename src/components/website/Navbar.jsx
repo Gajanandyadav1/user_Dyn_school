@@ -168,6 +168,7 @@ export default function Navbar() {
                 className="px-6 py-3 rounded-xl font-semibold text-white transition"
                 style={{ backgroundColor: accentColor, color: '#000' }}
               >
+                
                 Apply Now
               </button>
             </Link>
