@@ -100,6 +100,7 @@ export default function Academics() {
           >
             <span className="inline-block px-4 py-2 text-sm font-semibold rounded-full mb-4" style={{ backgroundColor: accentColor, color: primaryColor }}>
               Academics
+              
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 font-['Poppins']">
               Academic Excellence
