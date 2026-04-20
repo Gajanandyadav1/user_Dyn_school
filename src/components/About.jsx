@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { 
   CheckCircle2, Target, Eye, Award, Users, BookOpen, 
   GraduationCap, Calendar, Star, ArrowRight 
+  
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
