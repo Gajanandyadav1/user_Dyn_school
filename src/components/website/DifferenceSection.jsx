@@ -61,6 +61,7 @@ export default function DifferenceSection({ data }) {
                   color: primaryColor,
                 }}
               >
+                
                 {data.subheading}
                 
               </span>
