@@ -69,6 +69,7 @@ export default function GalleryPage() {
         />
 
         {/* Overlay */}
+        
         <div
           className="absolute inset-0 bg-gradient-to-r from-[var(--site-primary)] via-[var(--site-primary)]/75 to-[var(--site-primary)]/90 opacity-90"
         />
