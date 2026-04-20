@@ -7,11 +7,15 @@ import { DEFAULT_ACCENT, DEFAULT_PRIMARY } from '@/lib/siteTheme';
 import { Calendar } from 'lucide-react';
 export default function HeroSlider({ data }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const primaryColor = DEFAULT_PRIMARY || "var(--site-primary)";
-  const accentColor = DEFAULT_ACCENT || "var(--site-accent)";
-
   const content = data;
+
+  // Derive dynamic overlay settings from Admin Panel (with fallback to theme site-primary)
+  const overlayThemeColor = content?.overlayColor || "var(--site-primary)";
+  const overlayGradientEnd = content?.gradientEndColor || "var(--site-primary)";
+  const opacityValue = content?.overlayOpacity ? Number(content.overlayOpacity) / 100 : 0.6;
+
+  const accentColor = "var(--site-accent)";
+  const primaryColor = "var(--site-primary)";
 
   const slides =
     content?.blocks && content.blocks.length > 0
@@ -43,7 +47,7 @@ export default function HeroSlider({ data }) {
   const slide = slides[currentIndex];
 
   return (
-    <section className="relative h-[95vh] min-h-[600px] overflow-hidden bg-slate-900 group">
+    <section className="relative h-[95vh] min-h-[600px] overflow-hidden bg-slate-900 group ">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -66,9 +70,10 @@ export default function HeroSlider({ data }) {
 
           {/* Overlay */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 z-[1]"
             style={{
-              background: `linear-gradient(to right, ${primaryColor}E6, ${primaryColor}99, transparent)`,
+              background: `linear-gradient(to right, ${overlayThemeColor}, ${overlayGradientEnd})`,
+              opacity: opacityValue,
             }}
           />
 
@@ -92,7 +97,7 @@ export default function HeroSlider({ data }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
                   className="text-2xl md:text-3xl text-yellow-300 font-semibold mb-4"
-                  style={{color:"var(--site-accent)"}}
+                  style={{color:'#FACC15'}}
                 >
                   {slide.subheading}
                 </motion.h2>
@@ -132,7 +137,7 @@ export default function HeroSlider({ data }) {
                 {slide?.button2Text && (
               <Link
   to={slide?.button2Link || '#'}
-  className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white transition-all hover:text-[var(--site-primary)]"
+  className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white transition-all hover:text-[#1E3A8A]"
 >
   <Calendar className="w-5 h-5" />
   {slide.button2Text}

@@ -29,10 +29,10 @@ export default function AboutSection({ data }) {
             <div className="relative">
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl bg-slate-100">
              <img
-  src={content.image}
-  alt="About Us"
-  className="w-full   object-cover object-center "
-/>
+                    src={content.image}
+                    alt="About Us"
+                    className="w-full   object-cover object-center "
+                  />
               </div>
 
               {/* Decorative Elements */}
@@ -53,10 +53,10 @@ export default function AboutSection({ data }) {
             </span>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold   mb-6 font-['Poppins'] leading-tight" style={{color:"black"}}>
-              {content.heading}
+              {content.heading}   
             </h2>
 
-            <p className="text-gray-600 text-lg mb-8 leading-relaxed whitespace-pre-wrap">
+            <p className=" text-lg mb-8 leading-relaxed whitespace-pre-wrap"   style={{color:"black"}}>
               {content.description}
             </p>
 

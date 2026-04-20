@@ -51,7 +51,7 @@ export default function AboutPage() {
       {/* 1. HERO BLOCK */}
       <section className="relative w-full bg-[var(--site-primary)] overflow-hidden flex items-center justify-center min-h-[300px]"  >
         {hero?.backgroundImage ? (
-           <FixedImage src={hero.backgroundImage} ratio="28/9" className="opacity-40 mix-blend-overlay w-full" />
+           <FixedImage src={hero.backgroundImage} ratio="28/9"  className="opacity-40 mix-blend-overlay w-full" />
         ) : (
            <div className="w-full text-transparent" style={{ aspectRatio: '16/9' }}>.</div>
         )}
@@ -222,7 +222,7 @@ export default function AboutPage() {
         <h2
           className="text-4xl md:text-5xl font-bold mb-4 font-['Poppins']"
           style={{ color: "black" }}
-        >
+        >  
           {history?.heading || "Our Journey"}
         </h2>
 

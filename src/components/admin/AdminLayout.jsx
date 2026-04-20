@@ -72,11 +72,13 @@ const Layout = () => {
   }, [settings]);
 
   return (
-    <div data-site-theme="true">
+    <div data-site-theme="true" className="flex min-h-screen flex-col overflow-x-hidden bg-white text-slate-800">
       {/* <TopBar data={content?.home?.top_bar} /> */}
       <Navbar />
       
-      <Outlet />
+      <main className="flex-1 w-full mx-auto">
+        <Outlet />
+      </main>
 
       {/* <Newsletter data={content?.global?.newsletter} settings={settings} emailFallback={settings.email} /> */}
       <Footer data={content?.global} settings={settings} />

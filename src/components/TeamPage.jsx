@@ -81,31 +81,24 @@ const settings = {
       className="pb-24"
     >
       {/* ================= INTRO ================= */}
-     <section  className="relative h-[70vh] min-h-[350px] overflow-hidden"
-  style={{ backgroundColor: DEFAULT_PRIMARY }} >
-  {/* Background Image */}
-  <div
-    className="absolute inset-0 bg-cover bg-center opacity-30"
-    style={{
-      backgroundImage: `url(${
-        intro.backgroundImage ||
-        intro.image ||
-        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920"
-      })`,
-    }}
-  />
+      {/* ================= INTRO ================= */}
+      <section className="relative h-[70vh] min-h-[350px] overflow-hidden bg-[var(--site-primary)]">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{
+            backgroundImage: `url(${
+              intro.backgroundImage ||
+              intro.image ||
+              "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920"
+            })`,
+          }}
+        />
 
-  {/* Overlay */}
-  <div
-    className="absolute inset-0"
-    style={{
-      background: `linear-gradient(to right, ${DEFAULT_PRIMARY}, ${withAlpha(
-        DEFAULT_PRIMARY,
-        0.8,
-        "var(--site-primary)"
-      )}, transparent)`,
-    }}
-  />
+        {/* Overlay */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[var(--site-primary)] via-[var(--site-primary)]/80 to-transparent"
+        />
 
   {/* Center Content */}
   <div className="relative h-full max-w-7xl mx-auto px-4 flex items-center justify-center">
@@ -139,7 +132,6 @@ const settings = {
   </div>
 </section>
       {/* ================= MEMBER LEFT ================= */}
-     {/* ================= MEMBER LEFT ================= */}
 {(memberLeft.heading || memberLeft.image) && (
   <section className="py-20 md:py-28 bg-white">
     <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
@@ -147,8 +139,7 @@ const settings = {
       {/* Image Side */}
       <div className="relative group">
         <div
-          className="absolute -inset-3 rounded-[32px] blur-2xl opacity-20 group-hover:opacity-30 transition-all duration-500"
-          style={{ background: DEFAULT_PRIMARY }}
+          className="absolute -inset-3 rounded-[32px] blur-2xl opacity-20 group-hover:opacity-30 transition-all duration-500 bg-[var(--site-primary)]"
         ></div>
 
         <div className="relative rounded-[32px] overflow-hidden bg-white border border-slate-200 shadow-[0_25px_60px_rgba(0,0,0,0.12)]">
@@ -157,8 +148,7 @@ const settings = {
           {/* Floating Badge */}
           {memberLeft.smallText && (
             <div
-              className="absolute bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-semibold shadow-xl text-white"
-              style={{ background: DEFAULT_PRIMARY }}
+              className="absolute bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-semibold shadow-xl text-white bg-[var(--site-primary)]"
             >
               {memberLeft.smallText}
             </div>
@@ -169,39 +159,33 @@ const settings = {
       {/* Content Side */}
       <div>
         <span
-          className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[2px] uppercase mb-5"
-          style={{
-            background: withAlpha(DEFAULT_PRIMARY, 0.08),
-            color: DEFAULT_PRIMARY,
-          }}
+          className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[2px] uppercase mb-5 bg-[var(--site-primary)]/10 text-[var(--site-primary)]"
         >
           Leadership Message
         </span>
 
         {memberLeft.name && (
-          <h2 className="text-4xl md:text-5xl font-bold   font-['Poppins'] leading-tight" style={{color:'#2b2a2a'}}>
+          <h2 className="text-4xl md:text-5xl font-bold font-['Poppins'] leading-tight" style={{color:'#2b2a2a'}}>
             {memberLeft.name}
           </h2>
         )}
 
         {memberLeft.subheading && (
-          <p className="mt-3 text-xl   font-medium" style={{color:'#000'}}>
+          <p className="mt-3 text-xl font-medium" style={{color:'#000'}}>
             {memberLeft.subheading}
           </p>
         )}
 
         {memberLeft.heading && (
           <p
-            className="mt-4 text-lg font-semibold"
-            style={{ color: DEFAULT_PRIMARY }}
+            className="mt-4 text-lg font-semibold text-[var(--site-primary)]"
           >
             {memberLeft.heading}
           </p>
         )}
 
         {memberLeft.description && (
-          <div className="mt-8 border-l-4 pl-6 italic   leading-8 text-lg"
-            style={{ borderColor: DEFAULT_PRIMARY , color:'#65758b'}}
+          <div className="mt-8 border-l-4 pl-6 italic leading-8 text-lg border-[var(--site-primary)] text-[#65758b]"
           >
             {memberLeft.description}
           </div>
@@ -219,8 +203,7 @@ const settings = {
       {/* Image Side */}
       <div className="relative group md:order-2">
         <div
-          className="absolute -inset-3 rounded-[32px] blur-2xl opacity-20 group-hover:opacity-30 transition-all duration-500"
-          style={{ background: DEFAULT_PRIMARY ,}}
+          className="absolute -inset-3 rounded-[32px] blur-2xl opacity-20 group-hover:opacity-30 transition-all duration-500 bg-[var(--site-primary)]"
         ></div>
 
         <div className="relative rounded-[32px] overflow-hidden bg-white border border-slate-200 shadow-[0_25px_60px_rgba(0,0,0,0.12)]">
@@ -229,10 +212,9 @@ const settings = {
           {/* Floating Badge */}
           {memberRight.smallText && (
             <div
-              className="absolute bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-semibold shadow-xl text-white"
-              style={{ background: DEFAULT_PRIMARY }}
+              className="absolute bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-semibold shadow-xl text-white bg-[var(--site-primary)]"
             >
-              {memberRight.smallText}h
+              {memberRight.smallText}
             </div>
           )}
         </div>
@@ -241,31 +223,26 @@ const settings = {
       {/* Content Side */}
       <div className="md:order-1">
         <span
-          className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[2px] uppercase mb-5"
-          style={{
-            background: withAlpha(DEFAULT_PRIMARY, 0.08),
-            color: DEFAULT_PRIMARY,
-          }}
+          className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[2px] uppercase mb-5 bg-[var(--site-primary)]/10 text-[var(--site-primary)]"
         >
           From The Principal's Desk
         </span>
 
         {memberRight.name && (
-          <h2 className="text-4xl md:text-5xl font-bold   font-['Poppins'] leading-tight" style={{color:'#2b2a2a'}}>
+          <h2 className="text-4xl md:text-5xl font-bold font-['Poppins'] leading-tight" style={{color:'#2b2a2a'}}>
             {memberRight.name}
           </h2>
         )}
 
         {memberRight.subheading && (
-          <p className="mt-3 text-xl  font-medium" style={{color:'#000'}}>
+          <p className="mt-3 text-xl font-medium" style={{color:'#000'}}>
             {memberRight.subheading}
           </p>
         )}
 
         {memberRight.heading && (
           <p
-            className="mt-4 text-lg font-semibold"
-            style={{ color: DEFAULT_PRIMARY }}
+            className="mt-4 text-lg font-semibold text-[var(--site-primary)]"
           >
             {memberRight.heading}
           </p>
@@ -273,8 +250,7 @@ const settings = {
 
         {memberRight.description && (
           <div
-            className="mt-8 border-l-4 pl-6 italic  leading-8 text-lg"
-            style={{ borderColor: DEFAULT_PRIMARY , color:'#65758b'}}
+            className="mt-8 border-l-4 pl-6 italic leading-8 text-lg border-[var(--site-primary)] text-[#65758b]"
           >
             {memberRight.description}
           </div>

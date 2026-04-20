@@ -7,7 +7,7 @@ import { DEFAULT_ACCENT, DEFAULT_PRIMARY } from '@/lib/siteTheme';
 
 export default function Admission({ data }) {
   const content = data || {};
-  const primaryColor = DEFAULT_PRIMARY;
+  const primaryColor = "var(--site-primary)";
   const accentColor = "var(--site-accent)";
 
   const phone = content.phone || "+91 98765 43210";

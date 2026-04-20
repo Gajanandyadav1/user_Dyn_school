@@ -54,8 +54,7 @@ export default function GalleryPage() {
     >
       {/* ================= HERO SECTION ================= */}
       <section
-        className="relative h-[70vh] min-h-[350px] overflow-hidden"
-        style={{ backgroundColor: DEFAULT_PRIMARY }}
+        className="relative h-[70vh] min-h-[350px] overflow-hidden bg-[var(--site-primary)]"
       >
         {/* Background Image */}
         <div
@@ -71,16 +70,7 @@ export default function GalleryPage() {
 
         {/* Overlay */}
         <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(to right, ${withAlpha(
-              DEFAULT_PRIMARY,
-              0.92
-            )}, ${withAlpha(DEFAULT_PRIMARY, 0.75)}, ${withAlpha(
-              DEFAULT_PRIMARY,
-              0.88
-            )})`,
-          }}
+          className="absolute inset-0 bg-gradient-to-r from-[var(--site-primary)] via-[var(--site-primary)]/75 to-[var(--site-primary)]/90 opacity-90"
         />
 
         {/* Center Content */}
@@ -145,14 +135,9 @@ export default function GalleryPage() {
             onClick={() => setActiveCategory("all")}
             className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
               activeCategory === "all"
-                ? "text-white shadow-md"
+                ? "bg-[var(--site-primary)] text-white shadow-[0_4px_14px_rgba(30,58,138,0.3)] shadow-[var(--site-primary)]/30"
                 : "bg-white text-slate-600 border border-slate-200 hover:border-[var(--site-primary)] hover:text-[var(--site-primary)]"
             }`}
-            style={
-              activeCategory === "all"
-                ? { backgroundColor: DEFAULT_PRIMARY }
-                : {}
-            }
           >
             All
           </button>
@@ -164,14 +149,9 @@ export default function GalleryPage() {
               onClick={() => setActiveCategory(category.slug)}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                 activeCategory === category.slug
-                  ? "text-white shadow-md"
+                  ? "bg-[var(--site-primary)] text-white shadow-[0_4px_14px_rgba(30,58,138,0.3)] shadow-[var(--site-primary)]/30"
                   : "bg-white text-slate-600 border border-slate-200 hover:border-[var(--site-primary)] hover:text-[var(--site-primary)]"
               }`}
-              style={
-                activeCategory === category.slug
-                  ? { backgroundColor: DEFAULT_PRIMARY }
-                  : {}
-              }
             >
               {category.name}
             </button>
