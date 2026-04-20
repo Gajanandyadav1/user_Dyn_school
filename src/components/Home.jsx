@@ -56,6 +56,7 @@ export default function Home() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      
       <HeroSlider data={content?.home?.hero} />
       <AboutSection data={content?.home?.about_preview} />
       <DifferenceSection data={content?.home?.difference_section} />
